@@ -1,0 +1,74 @@
+Introduce the Problem
+Weather has always played a big role in how we live our daily lives. A snowstorm can shut down highways, heavy rain can delay flights, and even something that seems small, like fog, can last for hours and make driving dangerous. These kinds of events don’t just affect safety — they also disrupt transportation and the economy by causing accidents, delays, and losses. Because of this, I wanted to take a closer look at weather patterns and see what the data could tell me.
+
+For this project, my goal is to analyze U.S. weather event data and identify patterns across time and region. I want to know not just how often different types of weather events happen, but also when they are most likely to occur and how long they last. By studying these trends, I can highlight which events are most disruptive and better understand their impact.
+
+The main questions I set out to answer are:
+
+Which types of weather events are most common in the U.S.?
+How do weather events change by season (for example, winter compared to summer)?
+Do severe weather events last longer than mild ones, or are there exceptions?
+By answering these questions, I hope to show both the obvious seasonal patterns, like snow in winter and thunderstorms in summer, as well as some surprising findings, like how fog — though less dramatic — can still last for a long time and cause major issues.
+
+Introduce the Data
+For this project, I used the U.S. Weather Events Dataset from Kaggle: https://www.kaggle.com/datasets/sobhanmoosavi/us-weather-events?
+
+The dataset includes millions of weather event records collected across the United States over several years. I chose it because it directly connects to my research questions and gives me the ability to study different types of events, their severity, and how long they last.
+
+Some of the key features in the dataset are:
+
+Type—the kind of weather event (rain, snow, fog, storm, etc.).
+Severity—how intense the event was (light, moderate, or severe).
+StartTime (UTC) and EndTime (UTC)—when the event began and ended, which I used to calculate duration.
+Location—information about where the event happened (city, state, latitude/longitude).
+Precipitation (in) – how much rain or snow was recorded, when available.
+These features gave me enough information to clean, analyze, and visualize patterns in the data. For example, using the start and end times, I was able to create a new column for event duration, which helped me compare how long mild and severe events lasted. Overall, the dataset is large and detailed, which made it a good fit for the kinds of questions I wanted to answer.
+
+Preprocessing the Data
+Once I loaded the dataset into my notebook, the first thing I did was check the structure of the data. Since the file had millions of rows, I wanted to make sure the important columns I needed—like, and EndTime(UTC)—were complete. I noticed there were some missing values, so I decided to drop rows that didn’t have these key fields. That way, the analysis wouldn’t break or give misleading results.
+
+Next, I converted the StartTime(UTC) and EndTime(UTC) columns into proper datetime objects. This was really important because it allowed me to calculate how long each weather event lasted. Using those columns, I created a new feature called Duration (measured in hours). Having this feature made it possible to compare mild events with severe ones in a meaningful way.
+
+I also extracted the Month from the start time so I could analyze how weather events change seasonally. Later on, I mapped the month numbers to names (Jan, Feb, etc.) to make the visualizations easier to read.
+
+Finally, since there were a few extreme outliers in event duration (lasting hundreds or even thousands of hours), I filtered the data to only include durations between 0 and 200 hours. This step kept the plots readable and made sure the results focused on realistic event lengths.
+
+By doing these preprocessing steps—cleaning missing data, converting datetimes, creating new features, and removing extreme outliers—I prepared the dataset so it was ready for analysis and visualization.
+
+
+Data Understanding & Visualization
+After preprocessing the dataset, I started exploring it with visualizations to better understand the patterns. I focused on the three main questions I set at the beginning: which events are most common, how events vary by season, and whether severity affects duration.
+
+The first chart I created was a bar chart of the top 10 event types. This showed me right away that rain and snow dominate the dataset, with thunderstorms and fog also appearing frequently. This wasn’t too surprising, but it helped confirm that these would be the key event types to focus on.
+
+Next, I made a line chart of total events by month. This chart clearly showed seasonal trends. As expected, snow peaks in the winter months, while thunderstorms and heavy rain occur much more often in the summer. It was interesting to see how sharply these patterns stood out, and it confirmed that weather type is heavily tied to season.
+
+Finally, I used a boxplot to compare event duration by severity. In general, severe events tended to last longer than light or moderate ones, but I also noticed an exception: fog events. Even when classified as “light,” fog often lasted much longer than expected, sometimes outlasting more intense weather events like storms. This stood out to me as a surprising insight, because it showed that severity labels don’t always reflect the real-world impact of an event.
+
+Overall, the visualizations gave me a much clearer picture of the data. They confirmed some things I expected, like seasonal patterns, but also revealed less obvious insights, like how fog can be just as disruptive as more severe events because of its long duration.
+
+Storytelling/Analysis
+Looking back at my results, the data told a story that was both expected and surprising. I went into this project thinking I would mostly see obvious seasonal patterns, like snow in the winter and thunderstorms in the summer, and the data definitely confirmed that. The line chart made it clear how different types of weather dominate depending on the time of year.
+
+At the same time, the analysis also highlighted things I didn’t expect. For example, the boxplot showed that severe events often lasted longer than light or moderate ones, which made sense. But then I noticed how fog, even when labeled as “light,” could last for hours and hours. That stood out to me because it showed that severity doesn’t always match the actual disruption caused by an event. A long-lasting fog can be just as impactful as a shorter severe storm when it comes to safety and transportation.
+
+By answering my main questions, I was able to connect the data back to the real-world problem I started with. I learned which events are most common across the U.S., how strongly weather follows seasonal patterns, and how event duration can vary in unexpected ways. Together, these insights tell a story about how weather impacts daily life — not just through dramatic storms, but also through smaller events that linger and create hidden challenges. 
+ Impact Section
+Doing this project made me think about how the information could actually be used. Knowing which weather events are most common and when they tend to occur could help city planners, transportation officials, and delivery companies make better decisions. For example, if data shows that fog often lasts for hours in certain regions, highway departments could adjust how they handle traffic warnings or road safety during those times. Airlines and shipping companies could also use seasonal patterns to anticipate delays and plan ahead.
+
+At the same time, I also realized there are limits and risks. This dataset only captures reported weather events, which means some places — especially rural areas — may be underrepresented. If someone used this analysis without considering that gap, they might draw conclusions that don’t apply everywhere. Another risk is that focusing only on weather events doesn’t show the real outcomes like accidents, injuries, or economic losses. That kind of context would need more data to fully understand the impact.
+
+Overall, while this analysis can be useful, it’s important to remember that data doesn’t tell the whole story on its own. My findings should be seen as a starting point for asking more questions, not as final answers.
+References
+Kaggle dataset:
+
+https://www.kaggle.com/datasets/sobhanmoosavi/us-weather-events?
+
+Python libraries: pandas, matplotlib, seaborn
+
+Python Software Foundation. pandas library: https://pandas.pydata.org/
+
+Hunter, J. D. et al. matplotlib library: https://matplotlib.org/
+
+Waskom, M. et al. seaborn library: https://seaborn.pydata.org/
+
